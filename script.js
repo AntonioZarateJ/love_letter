@@ -14,7 +14,18 @@ let countdownInterval;
 const titleText = 'Para ti mi corazon bonito, Iren 💖:';
 const messageText = `
 Tal vez no he sido la pareja perfecta, pero quiero que sepas cuánto significas para mí. 
-`;
+No hay nada ni nadie en este mundo que me importe más que tú. Perdón si en algún momento te hice pensar demasiado o si llegué a causarte una lágrima, nunca fue mi intención.
+
+Lo que sí te aseguro es que mi amor por ti nunca se ha disminuido ni un solo instante. Esta intensidad de amor solo quiero dártela a ti, y con lo que pasó me di cuenta —y reafirmé— cuánto te extraño, te sueño, te adoro. Estoy más que seguro de que lo único que quiero es estar a tu lado. Gracias por seguir aquí a pesar de mis errores y mis momentos difíciles. Eres y siempre serás mi todo, estás tatuada en mi vida y en mi corazón para siempre.
+
+Quiero pedirte una nueva oportunidad, no solo para estar a tu lado, sino para demostrarte que juntos podemos superar cualquier obstáculo y cumplir esos sueños y promesas que planeamos con tanto amor, no pensemos que puede fallar de nuevo o se sienta que no es lo mismo. Si me lo permites, quiero que mantengamos todas las promesas que un día comentamos y especialmente esa promesa que sellamos con ese anillo, sé que tú trabajarás en lo tuyo y podras dar ese amor y cariño que siempre me dijiste que tu puedes dar y obviamente yo trabajare tambien con mis propios defectos.
+
+Con esto viene una pregunta muy importante...
+¿Quieres ser de nuevo mi novia, mi corazon hermoso, mi amor para siempre?
+La mujer con la que quiero compartir mis días, mis sueños, mis risas y hasta mis silencios.
+Con la que quiero caminar, construir y amar en cada etapa de nuestra vida.
+
+Te amo más allá de lo imaginable.`;
 
 const startDate = new Date('2025-03-27T00:00:00');
 
