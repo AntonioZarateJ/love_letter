@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>I love you Iren</title>
+  <link rel="shortcut icon" href="./assets/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="./style.css">
+  <style>
+    #heartCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    .floating-text {
+      position: fixed;
+      pointer-events: none;
+      color: #ff4d6d;
+      font-size: 28px;
+      font-weight: bold;
+      font-family: "Salsa", cursive; 
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      animation: float-up 1.5s ease-out forwards;
+      z-index: 10000;
+      transform: translate(-50%, -50%); 
+    }
+
+    @keyframes float-up {
+      0% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(-50%, -150%) scale(0.8); 
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="brand">
+  </div>
+  <div class="letter" id="letter">
+    <div class="envelope" id="envelope">
+      <ul class="envelopeHeader">
+        <li>
+          <p class="envelopeHeader__from">Para:</p>
+          <p class="envelopeHeader__from" id="from">El Amor de mi Vida Iren</p>
+        </li>
+        <li>
+          <p class="envelopeHeader__to">De:</p>
+          <p class="envelopeHeader__to" id="to">Tu peligroso Toñito</p>
+        </li>
+      </ul>
+      <svg class="cover" id="cover" viewBox="0 0 500 300" xmlns="http://www.w3.org/2000/svg">
+        <path d="M 0 0 L 500 0 L 275 150 Q 250 175 225 150 L 0 0 Z" />
+      </svg>
+      <div class="letterSheet" id="letterSheet">
+        <div class="close-button" id="close-button">&times;</div>
+        <h2 class="letterSheet__title" id="title"></h2>
+        <p class="letterSheet__text" id="message"></p>
+        <div id="countdown-container">
+          <p>Te sigo pensando desde el primer instante que te vi...</p>
+          <div id="countdown"></div>
+        </div>
+      </div>
+    </div>
+    <svg class="clickHere" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M7 7L5.5 5.5M15 7L16.5 5.5M5.5 16.5L7 15M11 5L11 3M5 11L3 11M17.1603 16.9887L21.0519 15.4659C21.4758 15.3001 21.4756 14.7003 21.0517 14.5346L11.6992 10.8799C11.2933 10.7213 10.8929 11.1217 11.0515 11.5276L14.7062 20.8801C14.8719 21.304 15.4717 21.3042 15.6375 20.8803L17.1603 16.9887Z"
+        stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+  </div>
+  <div class="shadowLetter" id="shadowLetter">
+  </div>
+  <canvas id="heartCanvas"></canvas>
+
+  <script src="./script.js"></script>
+  <script>
+    const canvas = document.getElementById("heartCanvas");
+    const ctx = canvas.getContext("2d");
+    let hearts = [];
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener("resize", resizeCanvas);
+    resizeCanvas();
+
+    const colores = ["#ff4d6d", "#ff6b81", "#c9184a", "#ff85a1", "#ff1493", "#d63384", "#f06595"];
+
+    function createHeart(x, y) {
+      for (let i = 0; i < 30; i++) {
+        const angle = Math.random() * 2 * Math.PI;
+        const speed = Math.random() * 3 + 1;
+        hearts.push({
+          x: x,
+          y: y,
+          size: Math.random() * 10 + 6,
+          speedX: Math.cos(angle) * speed,
+          speedY: Math.sin(angle) * speed,
+          alpha: 1,
+          color: colores[Math.floor(Math.random() * colores.length)],
+          rotation: Math.random() * 360
+        });
+      }
+    }
+
+    function drawHeart(x, y, size, alpha, color, rotation) {
+      ctx.save();
+      ctx.translate(x, y);
+      ctx.rotate(rotation);
+      ctx.scale(size / 30, size / 30);
+      ctx.globalAlpha = alpha;
+
+      ctx.beginPath();
+      ctx.moveTo(0, 0);
+      ctx.bezierCurveTo(0, -3, -5, -15, -15, -15);
+      ctx.bezierCurveTo(-35, -15, -35, 10, -35, 10);
+      ctx.bezierCurveTo(-35, 30, -15, 45, 0, 60);
+      ctx.bezierCurveTo(15, 45, 35, 30, 35, 10);
+      ctx.bezierCurveTo(35, 10, 35, -15, 15, -15);
+      ctx.bezierCurveTo(5, -15, 0, -3, 0, 0);
+      ctx.fillStyle = color;
+      ctx.fill();
+      ctx.restore();
+    }
+
+    function animateHearts() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      hearts.forEach((heart, index) => {
+        heart.x += heart.speedX;
+        heart.y += heart.speedY;
+        heart.alpha -= 0.01;
+        heart.rotation += 0.02;
+
+        if (heart.alpha <= 0) {
+          hearts.splice(index, 1);
+        } else {
+          drawHeart(heart.x, heart.y, heart.size, heart.alpha, heart.color, heart.rotation);
+        }
+      });
+      requestAnimationFrame(animateHearts);
+    }
+
+    animateHearts();
+
+    function showTeAmo(x, y) {
+      const textElement = document.createElement('span');
+      textElement.classList.add('floating-text');
+      textElement.innerText = 'Te amo';
+      textElement.style.left = x + 'px';
+      textElement.style.top = y + 'px';
+
+      document.body.appendChild(textElement);
+      setTimeout(() => {
+        textElement.remove();
+      }, 1500);
+    }
+    document.addEventListener("click", function (e) {
+      createHeart(e.clientX, e.clientY);
+      showTeAmo(e.clientX, e.clientY); 
+    });
+  </script>
+</body>
+
+ 
+</html>
