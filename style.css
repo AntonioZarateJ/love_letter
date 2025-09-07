@@ -17,7 +17,7 @@ body {
   min-height: 100dvh;
   -webkit-tap-highlight-color: transparent;
   user-select: none;
-    cursor: url('https://cdn-icons-png.flaticon.com/32/833/833472.png'), auto;
+  cursor: url('https://cdn-icons-png.flaticon.com/32/833/833472.png'), auto;
   overflow: hidden;
 }
 
@@ -83,6 +83,7 @@ body {
   align-items: center;
   flex-direction: column;
   overflow: hidden;
+  padding: 10px; /* Añadido para espacio en móviles */
 }
 
 .brand,
@@ -92,7 +93,8 @@ body {
 
 .letter {
   margin-bottom: 0vh;
-  width: 70vw;
+  width: 90vw; /* Cambiado de 70vw a 90vw para móviles */
+  max-width: 500px; /* Límite máximo para no crecer demasiado en desktop */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -117,17 +119,18 @@ body {
   display: flex;
   cursor: pointer;
   justify-content: center;
-  width: 60vw;
+  width: 100%; /* Cambiado para que use el 100% del contenedor .letter */
   aspect-ratio: 5/3;
   background-color: var(--color-primary);
 }
 
+/* Reemplaza esta sección */
 .envelope::after {
   content: "";
   position: absolute;
   bottom: 0;
-  border-left: 60vw solid var(--color-accent);
-  border-top: calc(calc(60vw * 3) / 5) solid transparent;
+  border-left: 95vw solid var(--color-accent);
+  border-top: calc(calc(95vw * 3) / 5) solid transparent;
   pointer-events: none;
   z-index: 4;
 }
@@ -137,8 +140,8 @@ body {
   pointer-events: none;
   position: absolute;
   bottom: 0;
-  border-right: 60vw solid var(--color-text);
-  border-top: calc(calc(60vw * 3) / 5) solid transparent;
+  border-right: 95vw solid var(--color-text);
+  border-top: calc(calc(95vw * 3) / 5) solid transparent;
   transform: perspective(400px);
   z-index: 3;
 }
@@ -151,13 +154,15 @@ body {
   position: absolute;
   color: var(--color-text);
   z-index: 5;
+  width: 100%; /* Asegura que ocupe todo el ancho */
 }
 
 .envelopeHeader li {
   display: flex;
-  font-size: calc(1.4vw + 1vh);
+  font-size: min(4vw, 18px); /* Tamaño responsive con límite máximo */
   text-transform: capitalize;
   gap: 0.4rem;
+  flex-wrap: wrap; /* Permite que se ajuste en pantallas pequeñas */
 }
 
 .envelopeHeader li p:last-child {
@@ -198,14 +203,14 @@ body {
 
 .letterSheet__title {
   color: var(--color-primary);
-  font-size: calc(4vw + 4vh);
+  font-size: min(6vw, 28px); /* Tamaño responsive con máximo */
   margin-left: 0;
 }
 
 .letterSheet__text {
   white-space: pre-line; 
   color: var(--color-text);
-  font-size: calc(1.5vw + 1.5vh);
+  font-size: min(4vw, 18px); /* Tamaño responsive con máximo */
   margin-left: 0;
   line-height: 1.6;
 }
@@ -235,7 +240,7 @@ body {
   position: absolute;
   top: 10px;
   right: 15px;
-  font-size: 30px;
+  font-size: 24px; /* Reducido para móviles */
   color: var(--silver);
   cursor: pointer;
   transition: color 0.3s ease;
@@ -251,14 +256,14 @@ body {
 }
 
 #countdown-container p {
-  font-size: 40px !important;
-  margin-top: 100px !important;
+  font-size: min(5vw, 22px) !important; /* Tamaño responsive */
+  margin-top: 20px !important; /* Reducido para móviles */
 }
 
 #countdown {
   font-weight: bold;
   color: var(--color-primary);
-  font-size: 40px !important;
+  font-size: min(4vw, 18px) !important; /* Tamaño responsive */
 }
 
 .cover {
@@ -306,13 +311,14 @@ body {
   pointer-events: none;
   top: 30%;
   left: 50%;
-  width: 30vw;
-  max-width: 300px;
+  width: 20vw; /* Reducido para móviles */
+  max-width: 100px; /* Máximo más pequeño */
   opacity: 0.3;
   aspect-ratio: 1/1;
   border-radius: 50%;
   animation: tap 4s ease infinite forwards;
   z-index: 10;
+  transform: translateX(-50%); /* Centrado correcto */
 }
 
 .clickHere path {
@@ -395,48 +401,79 @@ body {
   }
 }
 
-@media (orientation: landscape) {
+/* Media queries para móviles */
+@media (max-width: 768px) {
   .letter {
-    width: 50vw;
+    width: 95vw; /* Más ancho en móviles */
+    margin-bottom: 2vh;
   }
-
-  .envelope {
-    transform: scale(0.7) translateY(20%);
+  
+  .envelopeHeader li {
+    font-size: min(4.5vw, 16px); /* Ajuste para móviles */
   }
-
+  
   .letterSheet__title {
-    font-size: calc(1.5vw + 2vh);
+    font-size: min(7vw, 24px); /* Ajuste para móviles */
   }
-
+  
   .letterSheet__text {
-    font-size: calc(1.2vw + 1.8vh);
+    font-size: min(4.5vw, 16px); /* Ajuste para móviles */
   }
-
+  
   #countdown-container p {
-    font-size: calc(0.8vw + 0.8vh);
+    font-size: min(5.5vw, 20px) !important;
   }
-
+  
   #countdown {
-    font-size: calc(1vw + 1vh);
+    font-size: min(4.5vw, 16px) !important;
   }
-
-  .shadowLetter {
-    margin-top: 0%;
-    width: 40vw;
-    min-height: 3%;
+  
+  .clickHere {
+    width: 15vw;
+    max-width: 80px;
   }
-
+  
   @keyframes zoom-sheet-up {
     0% {
       transform: translate(0%, -10%);
     }
-
     30% {
       transform: translate(0%, -110%);
     }
-
     100% {
-      transform: translate(0%, -20vh) scale(1);
+      transform: translate(0%, -12vh) scale(1.05); /* Ajuste para móviles */
+    }
+  }
+}
+
+@media (orientation: landscape) and (max-height: 500px) {
+  body {
+    gap: 2vh;
+  }
+  
+  .letter {
+    width: 70vw;
+    margin-bottom: 1vh;
+  }
+  
+  .shadowLetter {
+    margin-top: 1%;
+    height: 0.5%;
+  }
+  
+  .letterSheet {
+    max-height: 60vh;
+  }
+  
+  @keyframes zoom-sheet-up {
+    0% {
+      transform: translate(0%, -10%);
+    }
+    30% {
+      transform: translate(0%, -110%);
+    }
+    100% {
+      transform: translate(0%, -10vh) scale(1);
     }
   }
 }
