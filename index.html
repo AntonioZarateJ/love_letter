@@ -41,6 +41,28 @@
         transform: translate(-50%, -150%) scale(0.8); 
       }
     }
+
+    #message-image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60vw;
+    /* Inicialmente, ocultamos el contenedor */
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    }
+
+    #message-image-container.show {
+        /* Esta clase se añade con JavaScript para mostrar la imagen */
+        opacity: 1;
+    }
+
+    #message-image {
+        max-width: 80px; /* Ajusta este valor para el tamaño que desees */
+        height: auto;
+        border-radius: 10px; /* Borde redondeado para un mejor estilo */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
   </style>
 </head>
 
