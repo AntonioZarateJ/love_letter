@@ -83,8 +83,8 @@ function openLetter() {
         letter.style.animation = 'none';
         shadowLetter.style.animation = 'none';
 
-        typeWriter(titleElement, titleText, 80, () => {
-            typeWriter(messageElement, messageText, 40, () => {
+        typeWriter(titleElement, titleText, 100, () => {
+            typeWriter(messageElement, messageText, 60, () => {
                 // Al terminar de escribir el mensaje, muestra la imagen
                 showMessageImage();
             });
